@@ -6,7 +6,7 @@ LABEL maintainer="mbainrot@github.com"
 RUN apt-get update && apt-get install -y wget unzip dos2unix sed original-awk
 
 # Retrieve a known good version
-RUN wget https://bitbucket.org/jpcgt/flatcam/downloads/FlatCAM_beta_8.99_sources.zip -O flatcam.zip && \
+RUN wget https://bitbucket.org/jpcgt/flatcam/downloads/FlatCAM_beta_8.993_sources.zip -O flatcam.zip && \
     unzip flatcam.zip && mv FlatCAM_*sources /usr/flatcam
 
 # First up we have to fix EOLs, the files have CRLF but python3 in ubuntu expects LF
@@ -25,13 +25,13 @@ RUN cd /usr/flatcam/ && \
     chmod +x setup_ubuntu.sh && ./setup_ubuntu.sh
 
 # Next we build an application shortcut and link it to /root
-RUN echo "[Desktop Entry]\nName=FlatCAM 8.99\nExec=python3 /usr/flatcam/FlatCAM.py\n\
+RUN echo "[Desktop Entry]\nName=FlatCAM 8.993\nExec=python3 /usr/flatcam/FlatCAM.py\n\
 	Type=Application\nIcon=/usr/flatcam/share/flatcam_icon128.png" \
     > /usr/share/applications/FlatCAM.desktop
 
 # Create desktop shortcut for root
 RUN mkdir -p /root/Desktop && \
-    echo "[Desktop Entry]\nType=Link\nName=FlatCAM 8.99\n\
+    echo "[Desktop Entry]\nType=Link\nName=FlatCAM 8.993\n\
     Icon=/usr/flatcam/share/flatcam_icon128.png\n\
 	URL=/usr/share/applications/FlatCAM.desktop" > /root/Desktop/flatcam.desktop
 
